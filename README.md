@@ -94,3 +94,5 @@ Thank you to everyone who has left feedback so far, it is appreciated.
 Oct 28, 2021 - 10,000 Total installs!
 
 Oct 23, 2022 - 30,000 Total installs!
+
+Oct 6, 2024 - 100,000 Total installs!
