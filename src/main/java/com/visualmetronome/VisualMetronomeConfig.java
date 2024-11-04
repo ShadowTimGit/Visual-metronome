@@ -368,5 +368,62 @@ public interface VisualMetronomeConfig extends Config
 		return Keybind.NOT_SET;
 	}
 
+	@ConfigSection(
+			name = "Additional Cycle Settings",
+			description = "Enable additional cycles to track",
+			position = 9
+	)
+	String AdditionalCycleSettings = "Additional Cycle Settings";
+
+	@Range(
+			min = 1
+	)
+	@ConfigItem(
+			position = 10,
+			keyName = "tickCount2",
+			name = "Second Cycle Length",
+			description = "Length for the second cycle in ticks"
+	)
+	default int tickCount2()
+	{
+		return 1;
+	}
+
+	@ConfigItem(
+			position = 11,
+			keyName = "showSecondCycle",
+			name = "Enable Second Cycle",
+			description = "Enables second tick number above the player"
+	)
+	default boolean enableCycle2()
+	{
+		return false;
+	}
+
+	@Range(
+			min = 1
+	)
+	@ConfigItem(
+			position = 12,
+			keyName = "tickCount3",
+			name = "Third Cycle Length",
+			description = "Length for the third cycle in ticks"
+	)
+	default int tickCount3()
+	{
+		return 1;
+	}
+
+	@ConfigItem(
+			position = 13,
+			keyName = "showThirdCycle",
+			name = "Enable Third Cycle",
+			description = "Enables third tick number above the player"
+	)
+	default boolean enableCycle3()
+	{
+		return false;
+	}
+
 }
 
