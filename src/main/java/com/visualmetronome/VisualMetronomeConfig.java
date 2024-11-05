@@ -369,31 +369,19 @@ public interface VisualMetronomeConfig extends Config
 	}
 
 	@ConfigSection(
-			name = "Additional Cycle Settings",
-			description = "Enable additional cycles to track",
-			position = 9
+			name = "Additional Overhead Cycle Settings",
+			description = "Enable additional tick cycles to track",
+			position = 9,
+			closedByDefault = true
 	)
-	String AdditionalCycleSettings = "Additional Cycle Settings";
-
-	@Range(
-			min = 1
-	)
-	@ConfigItem(
-			position = 10,
-			keyName = "tickCount2",
-			name = "Second Cycle Length",
-			description = "Length for the second cycle in ticks"
-	)
-	default int tickCount2()
-	{
-		return 1;
-	}
+	String additionalOverheadSettings = "Additional Overhead Tick Settings";
 
 	@ConfigItem(
-			position = 11,
+			position = 1,
 			keyName = "showSecondCycle",
 			name = "Enable Second Cycle",
-			description = "Enables second tick number above the player"
+			description = "Enables second tick number above the player",
+			section = additionalOverheadSettings
 	)
 	default boolean enableCycle2()
 	{
@@ -401,13 +389,52 @@ public interface VisualMetronomeConfig extends Config
 	}
 
 	@Range(
-			min = 1
+			min = 2
 	)
 	@ConfigItem(
-			position = 12,
+			position = 2,
+			keyName = "tickCount2",
+			name = "Second Cycle Length",
+			description = "Length for the second cycle in ticks",
+			section = additionalOverheadSettings
+	)
+	default int tickCount2()
+	{
+		return 1;
+	}
+
+	@ConfigItem(
+			position = 3,
+			keyName = "cycle2Color",
+			name = "Second Cycle Color",
+			description = "Configures the color of second cycle",
+			section = additionalOverheadSettings
+	)
+	default Color cycle2Color()
+	{
+		return Color.CYAN;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "showThirdCycle",
+			name = "Enable Third Cycle",
+			description = "Enables third tick number above the player",
+			section = additionalOverheadSettings
+	)
+	default boolean enableCycle3()
+	{
+		return false;
+	}
+	@Range(
+			min = 2
+	)
+	@ConfigItem(
+			position = 5,
 			keyName = "tickCount3",
 			name = "Third Cycle Length",
-			description = "Length for the third cycle in ticks"
+			description = "Length for the third cycle in ticks",
+			section = additionalOverheadSettings
 	)
 	default int tickCount3()
 	{
@@ -415,14 +442,15 @@ public interface VisualMetronomeConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 13,
-			keyName = "showThirdCycle",
-			name = "Enable Third Cycle",
-			description = "Enables third tick number above the player"
+			position = 6,
+			keyName = "cycle3Color",
+			name = "Third Cycle Color",
+			description = "Configures the color of third cycle (if enabled)",
+			section = additionalOverheadSettings
 	)
-	default boolean enableCycle3()
+	default Color cycle3Color()
 	{
-		return false;
+		return Color.CYAN;
 	}
 
 }
