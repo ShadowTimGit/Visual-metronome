@@ -53,6 +53,7 @@ public class VisualMetronomeNumberOverlay extends Overlay
             final int height = client.getLocalPlayer().getLogicalHeight()+20;
             final LocalPoint localLocation = client.getLocalPlayer().getLocalLocation();
             final Point playerPoint = Perspective.localToCanvas(client, localLocation, client.getPlane(), height);
+
             if (config.tickCount() == 1)
             {
                 OverlayUtil.renderTextLocation(graphics, playerPoint, String.valueOf(plugin.currentColorIndex), config.NumberColor());
@@ -61,8 +62,21 @@ public class VisualMetronomeNumberOverlay extends Overlay
             {
                 OverlayUtil.renderTextLocation(graphics, playerPoint, String.valueOf(plugin.tickCounter), config.NumberColor());
             }
-        }
 
+            int valueY = playerPoint.getY();
+            if(config.enableCycle2()){
+                int valueX = playerPoint.getX()-15;
+                final Point tick2Point = new Point(valueX,valueY);
+                OverlayUtil.renderTextLocation(graphics, tick2Point, String.valueOf(plugin.tickCounter2), config.cycle2Color());
+            }
+
+            if(config.enableCycle3()){
+                int valueX = playerPoint.getX()+15;
+                final Point tick3Point = new Point(valueX,valueY);
+                OverlayUtil.renderTextLocation(graphics, tick3Point, String.valueOf(plugin.tickCounter3), config.cycle3Color());
+            }
+
+        }
         return null;
     }
 
