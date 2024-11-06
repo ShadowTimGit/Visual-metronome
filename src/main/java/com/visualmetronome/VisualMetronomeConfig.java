@@ -400,7 +400,7 @@ public interface VisualMetronomeConfig extends Config
 	)
 	default int tickCount2()
 	{
-		return 1;
+		return 2;
 	}
 
 	@ConfigItem(
@@ -438,19 +438,31 @@ public interface VisualMetronomeConfig extends Config
 	)
 	default int tickCount3()
 	{
-		return 1;
+		return 2;
 	}
 
 	@ConfigItem(
 			position = 6,
 			keyName = "cycle3Color",
 			name = "Third Cycle Color",
-			description = "Configures the color of third cycle (if enabled)",
+			description = "Configures the color of third cycle",
 			section = additionalOverheadSettings
 	)
 	default Color cycle3Color()
 	{
 		return Color.CYAN;
+	}
+
+	@ConfigItem(
+			position = 7,
+			keyName = "overheadHeight",
+			name = "Overhead Tick Height",
+			description = "Configures the height of overhead ticks",
+			section = additionalOverheadSettings
+	)
+	default int overheadHeight()
+	{
+		return 20;
 	}
 
 }

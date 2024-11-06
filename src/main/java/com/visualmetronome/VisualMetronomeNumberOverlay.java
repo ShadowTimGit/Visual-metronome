@@ -50,7 +50,7 @@ public class VisualMetronomeNumberOverlay extends Overlay
                 graphics.setFont(new Font(config.fontType().toString(), Font.PLAIN, config.fontSize()));
             }
 
-            final int height = client.getLocalPlayer().getLogicalHeight()+20;
+            final int height = client.getLocalPlayer().getLogicalHeight()+config.overheadHeight();
             final LocalPoint localLocation = client.getLocalPlayer().getLocalLocation();
             final Point playerPoint = Perspective.localToCanvas(client, localLocation, client.getPlane(), height);
 
