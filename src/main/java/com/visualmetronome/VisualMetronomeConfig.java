@@ -368,6 +368,21 @@ public interface VisualMetronomeConfig extends Config
 		return Keybind.NOT_SET;
 	}
 
+	@Range(
+		min = 0
+	)
+	@ConfigItem(
+		position = 2,
+		keyName = "tickResetStartTick",
+		name = "Restart on Tick",
+		description = "Choose which tick the hotkey resets the timer to",
+		section = HotkeySettings
+	)
+	default int tickResetStartTick()
+	{
+		return 0;
+	}
+
 	@ConfigSection(
 			name = "Additional Overhead Cycle Settings",
 			description = "Enable additional tick cycles to track",

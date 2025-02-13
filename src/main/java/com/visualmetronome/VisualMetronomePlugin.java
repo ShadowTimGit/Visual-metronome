@@ -170,17 +170,23 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     {
     }
 
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if (config.tickResetHotkey().matches(e))
-        {
-            tickCounter = 0;
-            tickCounter2 = 0;
-            tickCounter3 = 0;
-            currentColorIndex = 0;
-        }
-    }
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		if (config.tickResetHotkey().matches(e)) {
+			//Cycle 1: Prevent out of bounds by setting to max or min value
+			tickCounter = currentColorIndex = Math.min(config.tickResetStartTick(), config.tickCount());
+
+			//Only reset cycles 2 and 3 if their range contains the reset start tick. Otherwise, only cycle 1 will be reset.
+			//Due to the way setting tickCounters 2 and 3 behave, you have to increment by 1 if the reset tick is >0
+			if (config.enableCycle2() && config.tickResetStartTick() <= config.tickCount2()){
+				tickCounter2 = tickCounter;
+			}
+			if (config.enableCycle3() && config.tickResetStartTick() <= config.tickCount3()){
+				tickCounter3 = tickCounter;
+			}
+		}
+	}
 
     @Override
     public void keyReleased(KeyEvent e)
