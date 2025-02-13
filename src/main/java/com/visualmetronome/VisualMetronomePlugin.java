@@ -178,7 +178,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 			tickCounter = currentColorIndex = Math.min(config.tickResetStartTick(), config.tickCount());
 
 			//Only reset cycles 2 and 3 if their range contains the reset start tick. Otherwise, only cycle 1 will be reset.
-			//Due to the way setting tickCounters 2 and 3 behave, you have to increment by 1 if the reset tick is >0
 			if (config.enableCycle2() && config.tickResetStartTick() <= config.tickCount2()){
 				tickCounter2 = tickCounter;
 			}
