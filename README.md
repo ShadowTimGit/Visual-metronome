@@ -3,7 +3,7 @@ A simple overlay that changes every tick. It displays a box on your screen, disp
 
 Used for the same purposes as the regular metronome, timing based activities such as PvM or 3-tick fishing. Helpful for if you don't have sound, are listening to music, or just prefer a visual cue.
 
-![](https://i.imgur.com/drcQDOn.gif) ![](https://i.imgur.com/wonUTcR.gif) ![](https://i.imgur.com/2qUetFH.gif) 
+![](https://i.imgur.com/drcQDOn.gif) ![](https://i.imgur.com/wonUTcR.gif) ![](https://i.imgur.com/2qUetFH.gif) ![](https://i.imgur.com/RkpEBjl.gif)
 
 # Usage
 Alt+click on the border of the overlay to change the size
@@ -13,7 +13,9 @@ Alt+right click on the overlay to reset to default size
 ![](https://i.imgur.com/SWQKf9i.gif)
 
 # Settings
-![](https://i.imgur.com/BI94Xd1.png)
+![](https://i.imgur.com/tmT2v2l.png)
+
+![](https://i.imgur.com/iFk0lsj.png)
 
 # Changelog
 - **V1.1**
@@ -85,9 +87,14 @@ Alt+right click on the overlay to reset to default size
     - Change tile layer to ABOVE_SCENE to make compatible with Improved Tile Indicators "Draw Tile below Player" setting
 - **V1.4.5.4**
     - Fixed bug from V1.4.5.3 where "Show Tick Number Above Player" was showing under prayers
-- **V1.4.6** (Thanks [Jefeh](https://github.com/JorgeFernandezH))
-    - Added option to enable 2 more overhead ticks with their own cycles
+- **V1.4.6**
+    - Added option to enable 2 more overhead ticks with their own cycles *(Thanks [Jefeh](https://github.com/JorgeFernandezH))*
     - Added option to change height of overhead ticks
+- **V1.4.7**
+    - Added option to reset tick cycle to a specific tick when using the hotkey *(Thanks [Lapask](https://github.com/Lapask))*
+    - Added option to use metronome tick color for overhead tick
+    - Added option to offset the overhead tick on the X axis
+    - Added option to set the gap distance between the extra overhead tick cycles
 
 # Feedback
 I'm open to all feedback on bugs or features you want to see in this plugin. Give feedback here on this github page or message me on discord, vincent58. 

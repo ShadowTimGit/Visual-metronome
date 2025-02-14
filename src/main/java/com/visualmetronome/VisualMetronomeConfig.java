@@ -455,6 +455,22 @@ public interface VisualMetronomeConfig extends Config
 
 	@ConfigItem(
 			position = 7,
+			keyName = "overheadCyclesGapDistance",
+			name = "Second and Third Tick Gap Distance",
+			description = "Configures the distance of the gap between the overhead ticks",
+			section = additionalOverheadSettings
+	)
+	default int overheadCyclesGapDistance()
+	{
+		return 20;
+	}
+
+	@Range(
+			min = -500,
+			max = 500
+	)
+	@ConfigItem(
+			position = 8,
 			keyName = "overheadHeight",
 			name = "Overhead Tick Height",
 			description = "Configures the height of overhead ticks",
@@ -465,5 +481,32 @@ public interface VisualMetronomeConfig extends Config
 		return 20;
 	}
 
+	@Range(
+			min = -50,
+			max = 50
+	)
+	@ConfigItem(
+			position = 9,
+			keyName = "overheadXCenterOffset",
+			name = "Overhead Tick X Center Offset",
+			description = "Configures the X offset of overhead ticks",
+			section = additionalOverheadSettings
+	)
+	default int overheadXCenterOffset()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 10,
+			keyName = "overheadUseCurrentColor",
+			name = "Use Metronome Color for Overhead",
+			description = "Uses the metronome color for the overhead tick color instead of Tick Number Color",
+			section = additionalOverheadSettings
+	)
+	default boolean overheadUseCurrentColor()
+	{
+		return false;
+	}
 }
 
