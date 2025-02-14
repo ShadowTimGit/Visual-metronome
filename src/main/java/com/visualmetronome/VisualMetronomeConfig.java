@@ -374,7 +374,7 @@ public interface VisualMetronomeConfig extends Config
 	@ConfigItem(
 		position = 2,
 		keyName = "tickResetStartTick",
-		name = "Restart on Tick",
+		name = "Reset to Tick",
 		description = "Choose which tick the hotkey resets the timer to",
 		section = HotkeySettings
 	)
