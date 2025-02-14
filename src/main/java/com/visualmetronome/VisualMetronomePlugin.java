@@ -170,28 +170,28 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     {
     }
 
-	@Override
-	public void keyPressed(KeyEvent e)
+    @Override
+    public void keyPressed(KeyEvent e)
     {
-		if (config.tickResetHotkey().matches(e))
+        if (config.tickResetHotkey().matches(e))
         {
             // Reset Cycle 1
             if (config.tickCount() > 1)
             {
                 // Prevent out of bounds by setting to 0 if reset start is above tick count
-                resetValue = (config.tickResetStartTick() >= config.tickCount()) ? 0:config.tickResetStartTick();
+                resetValue = (config.tickResetStartTick() >= config.tickCount()) ? 0 : config.tickResetStartTick();
                 tickCounter = resetValue;
                 currentColorIndex = 0;
             }
             else
             {
-                resetValue = (config.tickResetStartTick() >= config.colorCycle()) ? 0:config.tickResetStartTick();
+                resetValue = (config.tickResetStartTick() >= config.colorCycle()) ? 0 : config.tickResetStartTick();
                 tickCounter = resetValue;
                 currentColorIndex = resetValue;
             }
-            tickCounter2 = (config.tickResetStartTick() >= config.tickCount2()) ? 0:config.tickResetStartTick();
-            tickCounter3 = (config.tickResetStartTick() >= config.tickCount3()) ? 0:config.tickResetStartTick();
-		}
+            tickCounter2 = (config.tickResetStartTick() >= config.tickCount2()) ? 0 : config.tickResetStartTick();
+            tickCounter3 = (config.tickResetStartTick() >= config.tickCount3()) ? 0 : config.tickResetStartTick();
+        }
     }
 
     @Override
