@@ -48,7 +48,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     protected int tickCounter2 = 0;
     protected int tickCounter3 = 0;
     protected Color currentColor = Color.WHITE;
-
+    protected int resetValue = 0;
     protected Dimension DEFAULT_SIZE = new Dimension(25, 25);
 
     @Provides
@@ -175,10 +175,22 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     {
         if (config.tickResetHotkey().matches(e))
         {
-            tickCounter = 0;
-            tickCounter2 = 0;
-            tickCounter3 = 0;
-            currentColorIndex = 0;
+            // Reset Cycle 1
+            if (config.tickCount() > 1)
+            {
+                // Prevent out of bounds by setting to 0 if reset start is above tick count
+                resetValue = (config.tickResetStartTick() >= config.tickCount()) ? 0 : config.tickResetStartTick();
+                tickCounter = resetValue;
+                currentColorIndex = 0;
+            }
+            else
+            {
+                resetValue = (config.tickResetStartTick() >= config.colorCycle()) ? 0 : config.tickResetStartTick();
+                tickCounter = resetValue;
+                currentColorIndex = resetValue;
+            }
+            tickCounter2 = (config.tickResetStartTick() >= config.tickCount2()) ? 0 : config.tickResetStartTick();
+            tickCounter3 = (config.tickResetStartTick() >= config.tickCount3()) ? 0 : config.tickResetStartTick();
         }
     }
 
