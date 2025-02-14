@@ -172,7 +172,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
 	@Override
 	public void keyPressed(KeyEvent e)
-	{
+    {
 		if (config.tickResetHotkey().matches(e))
         {
             // Reset Cycle 1
@@ -189,11 +189,10 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 tickCounter = resetValue;
                 currentColorIndex = resetValue;
             }
-
             tickCounter2 = (config.tickResetStartTick() >= config.tickCount2()) ? 0:config.tickResetStartTick();
             tickCounter3 = (config.tickResetStartTick() >= config.tickCount3()) ? 0:config.tickResetStartTick();
 		}
-	}
+    }
 
     @Override
     public void keyReleased(KeyEvent e)
