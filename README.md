@@ -95,6 +95,8 @@ Alt+right click on the overlay to reset to default size
     - Added option to use metronome tick color for overhead tick
     - Added option to offset the overhead tick on the X axis
     - Added option to set the gap distance between the extra overhead tick cycles
+- **V1.4.7.1**
+    - Fixed bug for Reset to Specific Tick feature *(Thanks [Slug-Man](https://github.com/Slug-Man))*
 
 # Feedback
 I'm open to all feedback on bugs or features you want to see in this plugin. Give feedback here on this github page or message me on discord, vincent58. 
