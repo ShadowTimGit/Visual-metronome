@@ -97,6 +97,8 @@ Alt+right click on the overlay to reset to default size
     - Added option to set the gap distance between the extra overhead tick cycles
 - **V1.4.7.1**
     - Fixed bug for Reset to Specific Tick feature *(Thanks [Slug-Man](https://github.com/Slug-Man))*
+- **V1.4.8**
+    - Added Tick Counter Follows Mouse *(Thanks [Manlet008](https://github.com/Manlet008))*
 
 # Feedback
 I'm open to all feedback on bugs or features you want to see in this plugin. Give feedback here on this github page or message me on discord, vincent58. 

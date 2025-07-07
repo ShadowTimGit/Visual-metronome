@@ -393,7 +393,7 @@ public interface VisualMetronomeConfig extends Config
 			position = 0,
 			keyName = "mouseFollowingTick",
 			name = "Tick Counter Follows Mouse",
-			description = "Makes the tick counter follow your mouse cursor",
+			description = "Makes the tick counter follow your mouse cursor. It uses the same settings as the Overhead Tick Number",
 			section = mouseFollowingSettings
 	)
 	default boolean mouseFollowingTick()
