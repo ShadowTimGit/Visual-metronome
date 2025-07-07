@@ -254,22 +254,27 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     private final MouseAdapter mouseAdapter = new MouseAdapter()
     {
         @Override
-        public void mouseMoved(MouseEvent e) {
+        public void mouseMoved(MouseEvent e)
+        {
             updateMousePosition(e);
         }
 
         @Override
-        public void mouseDragged(MouseEvent e) {
+        public void mouseDragged(MouseEvent e)
+        {
             updateMousePosition(e);
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
+        public void mousePressed(MouseEvent e)
+        {
             updateMousePosition(e);
         }
 
-        private void updateMousePosition(MouseEvent e) {
-            if (mouseTrackingEnabled && client != null) {
+        private void updateMousePosition(MouseEvent e)
+        {
+            if (mouseTrackingEnabled && client != null)
+            {
                 mousePosition = client.getMouseCanvasPosition();
             }
         }
