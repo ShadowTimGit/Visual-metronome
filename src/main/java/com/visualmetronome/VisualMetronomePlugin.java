@@ -1,6 +1,8 @@
 package com.visualmetronome;
 
 import com.google.inject.Provides;
+import net.runelite.api.Point;
+import net.runelite.api.Client;
 import net.runelite.api.events.GameTick;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -14,6 +16,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import net.runelite.client.input.KeyListener;
 import net.runelite.client.input.KeyManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @PluginDescriptor(
         name = "Visual Metronome",
@@ -43,12 +47,20 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Inject
     private KeyManager keyManager;
 
+    @Inject
+    private Client client;
+
+    @Inject
+    private MouseFollowingOverlay mouseFollowingOverlay;
+
     protected int currentColorIndex = 0;
     protected int tickCounter = 0;
     protected int tickCounter2 = 0;
     protected int tickCounter3 = 0;
     protected Color currentColor = Color.WHITE;
     protected Dimension DEFAULT_SIZE = new Dimension(25, 25);
+    private Point mousePosition = new Point(0, 0);
+    private boolean mouseTrackingEnabled = false;
 
     @Provides
     VisualMetronomeConfig provideConfig(ConfigManager configManager)
@@ -87,6 +99,18 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
             return;
         }
 
+        if (event.getGroup().equals("visualmetronome"))
+        {
+            switch (event.getKey())
+            {
+                case "mouseFollowingTick":
+                    setMouseTrackingEnabled(config.mouseFollowingTick());
+                    break;
+                case "mouseOffsetX":
+                case "mouseOffsetY":
+                    break;
+            }
+        }
         if (currentColorIndex > config.colorCycle())
         {
             currentColorIndex = 0;
@@ -116,6 +140,10 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         overlayManager.add(overlay);
         overlayManager.add(tileOverlay);
         overlayManager.add(numberOverlay);
+        client.getCanvas().addMouseListener(mouseAdapter);
+        client.getCanvas().addMouseMotionListener(mouseAdapter);
+        overlayManager.add(mouseFollowingOverlay);
+        setMouseTrackingEnabled(config.mouseFollowingTick());
         keyManager.registerKeyListener(this);
     }
 
@@ -130,7 +158,11 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         tickCounter3 = 0;
         currentColorIndex = 0;
         currentColor = config.getTickColor();
+        overlayManager.remove(mouseFollowingOverlay);
+        client.getCanvas().removeMouseListener(mouseAdapter);
+        client.getCanvas().removeMouseMotionListener(mouseAdapter);
         keyManager.unregisterKeyListener(this);
+
     }
 
     //hotkey settings
@@ -208,4 +240,39 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 currentColor = config.getTick10Color();
         }
     }
+
+    public Point getMousePosition()
+    {
+        return mousePosition;
+    }
+
+    public void setMouseTrackingEnabled(boolean enabled)
+    {
+        this.mouseTrackingEnabled = enabled;
+    }
+
+    private final MouseAdapter mouseAdapter = new MouseAdapter()
+    {
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            updateMousePosition(e);
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            updateMousePosition(e);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            updateMousePosition(e);
+        }
+
+        private void updateMousePosition(MouseEvent e) {
+            if (mouseTrackingEnabled && client != null) {
+                mousePosition = client.getMouseCanvasPosition();
+            }
+        }
+    };
+
 }

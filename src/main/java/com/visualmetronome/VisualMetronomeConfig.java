@@ -382,11 +382,61 @@ public interface VisualMetronomeConfig extends Config
 	{
 		return 0;
 	}
+	@ConfigSection(
+			name = "Mouse Following Settings",
+			description = "Settings for mouse-following tick counter",
+			position = 9,
+			closedByDefault = true
+	)
+	String mouseFollowingSettings = "Mouse Following Settings";
+	@ConfigItem(
+			position = 0,
+			keyName = "mouseFollowingTick",
+			name = "Tick Counter Follows Mouse",
+			description = "Makes the tick counter follow your mouse cursor",
+			section = mouseFollowingSettings
+	)
+	default boolean mouseFollowingTick()
+	{
+		return false;
+	}
+
+	@Range(
+			min = -100,
+			max = 100
+	)
+	@ConfigItem(
+			position = 1,
+			keyName = "mouseOffsetX",
+			name = "Mouse X Offset",
+			description = "X offset from mouse cursor for tick counter",
+			section = mouseFollowingSettings
+	)
+	default int mouseOffsetX()
+	{
+		return 10;
+	}
+
+	@Range(
+			min = -100,
+			max = 100
+	)
+	@ConfigItem(
+			position = 2,
+			keyName = "mouseOffsetY",
+			name = "Mouse Y Offset",
+			description = "Y offset from mouse cursor for tick counter",
+			section = mouseFollowingSettings
+	)
+	default int mouseOffsetY()
+	{
+		return -10;
+	}
 
 	@ConfigSection(
 			name = "Additional Overhead Cycle Settings",
 			description = "Enable additional tick cycles to track",
-			position = 9,
+			position = 10,
 			closedByDefault = true
 	)
 	String additionalOverheadSettings = "Additional Overhead Tick Settings";
