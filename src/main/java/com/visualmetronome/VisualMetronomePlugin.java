@@ -59,8 +59,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     protected int tickCounter3 = 0;
     protected Color currentColor = Color.WHITE;
     protected Dimension DEFAULT_SIZE = new Dimension(25, 25);
-    private Point mousePosition = new Point(0, 0);
-    private boolean mouseTrackingEnabled = false;
 
     @Provides
     VisualMetronomeConfig provideConfig(ConfigManager configManager)
@@ -94,23 +92,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Subscribe
     public void onConfigChanged(ConfigChanged event)
     {
-        if (!event.getGroup().equals("visualmetronome"))
-        {
-            return;
-        }
-
-        if (event.getGroup().equals("visualmetronome"))
-        {
-            switch (event.getKey())
-            {
-                case "mouseFollowingTick":
-                    setMouseTrackingEnabled(config.mouseFollowingTick());
-                    break;
-                case "mouseOffsetX":
-                case "mouseOffsetY":
-                    break;
-            }
-        }
         if (currentColorIndex > config.colorCycle())
         {
             currentColorIndex = 0;
@@ -140,10 +121,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         overlayManager.add(overlay);
         overlayManager.add(tileOverlay);
         overlayManager.add(numberOverlay);
-        client.getCanvas().addMouseListener(mouseAdapter);
-        client.getCanvas().addMouseMotionListener(mouseAdapter);
         overlayManager.add(mouseFollowingOverlay);
-        setMouseTrackingEnabled(config.mouseFollowingTick());
         keyManager.registerKeyListener(this);
     }
 
@@ -159,8 +137,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         currentColorIndex = 0;
         currentColor = config.getTickColor();
         overlayManager.remove(mouseFollowingOverlay);
-        client.getCanvas().removeMouseListener(mouseAdapter);
-        client.getCanvas().removeMouseMotionListener(mouseAdapter);
         keyManager.unregisterKeyListener(this);
 
     }
@@ -240,44 +216,4 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 currentColor = config.getTick10Color();
         }
     }
-
-    public Point getMousePosition()
-    {
-        return mousePosition;
-    }
-
-    public void setMouseTrackingEnabled(boolean enabled)
-    {
-        this.mouseTrackingEnabled = enabled;
-    }
-
-    private final MouseAdapter mouseAdapter = new MouseAdapter()
-    {
-        @Override
-        public void mouseMoved(MouseEvent e)
-        {
-            updateMousePosition(e);
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent e)
-        {
-            updateMousePosition(e);
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e)
-        {
-            updateMousePosition(e);
-        }
-
-        private void updateMousePosition(MouseEvent e)
-        {
-            if (mouseTrackingEnabled && client != null)
-            {
-                mousePosition = client.getMouseCanvasPosition();
-            }
-        }
-    };
-
 }
