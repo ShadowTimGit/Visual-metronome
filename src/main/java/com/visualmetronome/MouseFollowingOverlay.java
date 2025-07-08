@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 public class MouseFollowingOverlay extends Overlay {
+    private final Client client;
     private final VisualMetronomeConfig config;
     private final VisualMetronomePlugin plugin;
 
@@ -23,6 +24,7 @@ public class MouseFollowingOverlay extends Overlay {
     public MouseFollowingOverlay(Client client, VisualMetronomeConfig config, VisualMetronomePlugin plugin)
     {
         super(plugin);
+        this.client = client;
         this.config = config;
         this.plugin = plugin;
         setPosition(OverlayPosition.DYNAMIC);
@@ -35,7 +37,7 @@ public class MouseFollowingOverlay extends Overlay {
     {
         if (config.mouseFollowingTick())
         {
-            Point mousePos = plugin.getMousePosition();
+            Point mousePos = client.getMouseCanvasPosition();
             if (mousePos != null)
             {
                 // Set font
