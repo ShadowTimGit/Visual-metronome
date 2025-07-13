@@ -1,4 +1,6 @@
-# Visual Metronome ![Total installs](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/visual-metronome)
+# Visual Metronome [![Total installs](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/visual-metronome)](https://runelite.net/plugin-hub/show/visual-metronome) [![Plugin Rank](http://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/rank/plugin/visual-metronome)](https://runelite.net/plugin-hub)
+#### A plugin for [Runelite](https://runelite.net/)
+
 A simple overlay that changes every tick. It displays a box on your screen, displays a number, or displays your true tile that changes every game tick. 
 
 Used for the same purposes as the regular metronome, timing based activities such as PvM or 3-tick fishing. Helpful for if you don't have sound, are listening to music, or just prefer a visual cue.
