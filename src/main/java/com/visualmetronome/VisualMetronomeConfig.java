@@ -8,7 +8,6 @@ import net.runelite.client.config.Range;
 import net.runelite.client.config.ConfigSection;
 import net.runelite.client.config.Keybind;
 
-import net.runelite.client.config.*;
 import java.awt.Color;
 
 @ConfigGroup("visualmetronome")
