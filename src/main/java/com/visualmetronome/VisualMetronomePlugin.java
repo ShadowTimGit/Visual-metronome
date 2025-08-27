@@ -18,6 +18,15 @@ import net.runelite.client.input.KeyListener;
 import net.runelite.client.input.KeyManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import net.runelite.client.party.PartyService;
+import net.runelite.client.party.WSClient;
+import net.runelite.client.party.events.UserJoin;
+import net.runelite.client.party.events.UserPart;
+import com.visualmetronome.messages.TickSyncMessage;
+import net.runelite.client.party.PartyMember;
+
+import java.util.*;
+
 
 @PluginDescriptor(
         name = "Visual Metronome",
@@ -26,6 +35,7 @@ import java.awt.event.MouseEvent;
 )
 public class VisualMetronomePlugin extends Plugin implements KeyListener
 {
+
     @Inject
     private OverlayManager overlayManager;
 
@@ -53,6 +63,16 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Inject
     private MouseFollowingOverlay mouseFollowingOverlay;
 
+    @Inject
+    private PartyService partyService;
+
+    @Inject
+    private WSClient wsClient;
+
+    // Get all members
+    List<PartyMember> members = Collections.emptyList();
+
+    private static final String CONFIG_GROUP = "visualmetronome";
     protected int currentColorIndex = 0;
     protected int tickCounter = 0;
     protected int tickCounter2 = 0;
@@ -87,7 +107,82 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
             tickCounter3 = 0;
         }
         tickCounter3++;
+
+        // Get all members
+        members = partyService.getMembers();
+
+        // Party sync
+        if (!members.isEmpty())
+        {
+            String targetName = config.syncTarget();
+            if (targetName == null || targetName.isEmpty())
+            {
+                System.out.println("Party sync skipped: no target specified");
+                return;
+            }
+
+            PartyMember localPlayer = partyService.getLocalMember();
+            for (PartyMember member : members)
+            {
+
+
+                    TickSyncMessage msg = new TickSyncMessage(
+                            tickCounter,
+                            tickCounter2,
+                            tickCounter3,
+                            currentColorIndex,
+                            config.tickCount(),
+                            localPlayer.getDisplayName(),
+                            member.getDisplayName()
+                    );
+
+                    //System.out.println("Sending TickSyncMessage to " + member.getDisplayName() + " from " + localPlayer.getDisplayName() );
+                    partyService.send(msg); // send via PartyService
+
+                    break;
+
+            }
+
+        }
+
+
     }
+
+    @Subscribe
+    public void onTickSyncMessage(TickSyncMessage msg)
+    {
+        String Sender = msg.getSenderName();
+        String targetName = config.syncTarget();
+        if(!config.enablePartySync()){return;}
+        if (!Objects.equals(Sender, targetName)){return;}
+        // ✅ Apply received counters
+        this.tickCounter = msg.getTickCounter();
+        this.tickCounter2 = msg.getTickCounter2();
+        this.tickCounter3 = msg.getTickCounter3();
+        //setCurrentColorByColorIndex(this.currentColorIndex);
+
+        // ✅ Update config so UI reflects remote tickCount
+        configManager.setConfiguration(
+                CONFIG_GROUP,
+                "tickCount",
+                msg.getTickCount()
+        );
+    }
+
+    @Subscribe
+    public void onUserJoin(UserJoin event)
+    {
+        // Get all members
+        members = partyService.getMembers();
+    }
+
+    @Subscribe
+    public void onUserPart(UserPart event)
+    {
+        // Get all members
+        members = partyService.getMembers();
+    }
+
 
     @Subscribe
     public void onConfigChanged(ConfigChanged event)
@@ -123,6 +218,8 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         overlayManager.add(numberOverlay);
         overlayManager.add(mouseFollowingOverlay);
         keyManager.registerKeyListener(this);
+        wsClient.registerMessage(TickSyncMessage.class);
+
     }
 
     @Override
@@ -138,6 +235,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         currentColor = config.getTickColor();
         overlayManager.remove(mouseFollowingOverlay);
         keyManager.unregisterKeyListener(this);
+        wsClient.unregisterMessage(TickSyncMessage.class);
 
     }
 
