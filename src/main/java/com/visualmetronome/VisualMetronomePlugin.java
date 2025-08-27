@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Objects;
 
 
+
 @PluginDescriptor(
         name = "Visual Metronome",
         description = "Shows a visual cue on an overlay every game tick to help timing based activities",
@@ -119,35 +120,29 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
             String targetName = config.syncTarget();
             if (targetName == null || targetName.isEmpty())
             {
-                System.out.println("Party sync skipped: no target specified");
                 return;
             }
 
             PartyMember localPlayer = partyService.getLocalMember();
             for (PartyMember member : members)
             {
-
-
                     TickSyncMessage msg = new TickSyncMessage(
                             tickCounter,
                             tickCounter2,
                             tickCounter3,
                             currentColorIndex,
                             config.tickCount(),
+                            config.tickCount2(),
+                            config.tickCount3(),
                             localPlayer.getDisplayName(),
                             member.getDisplayName()
                     );
 
-                    //System.out.println("Sending TickSyncMessage to " + member.getDisplayName() + " from " + localPlayer.getDisplayName() );
-                    partyService.send(msg); // send via PartyService
-
+                    partyService.send(msg);
                     break;
 
             }
-
         }
-
-
     }
 
     @Subscribe
@@ -155,19 +150,34 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     {
         String Sender = msg.getSenderName();
         String targetName = config.syncTarget();
+
         if(!config.enablePartySync()){return;}
+
         if (!Objects.equals(Sender, targetName)){return;}
-        // ✅ Apply received counters
+
+        //  Apply received counters
         this.tickCounter = msg.getTickCounter();
         this.tickCounter2 = msg.getTickCounter2();
         this.tickCounter3 = msg.getTickCounter3();
-        //setCurrentColorByColorIndex(this.currentColorIndex);
 
-        // ✅ Update config so UI reflects remote tickCount
+        this.currentColorIndex = msg.getColorIndex();
+        setCurrentColorByColorIndex(this.currentColorIndex);
+
+        //  Update config so UI reflects remote tickCount
         configManager.setConfiguration(
                 CONFIG_GROUP,
                 "tickCount",
                 msg.getTickCount()
+        );
+        configManager.setConfiguration(
+                CONFIG_GROUP,
+                "tickCount2",
+                msg.getTickCount2()
+        );
+        configManager.setConfiguration(
+                CONFIG_GROUP,
+                "tickCount3",
+                msg.getTickCount3()
         );
     }
 
