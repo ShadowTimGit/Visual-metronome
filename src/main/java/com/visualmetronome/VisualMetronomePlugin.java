@@ -25,7 +25,9 @@ import net.runelite.client.party.events.UserPart;
 import com.visualmetronome.messages.TickSyncMessage;
 import net.runelite.client.party.PartyMember;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 
 @PluginDescriptor(
