@@ -1,0 +1,64 @@
+package com.visualmetronome.messages;
+
+import net.runelite.client.party.PartyMember;
+import net.runelite.client.party.messages.PartyMemberMessage;
+
+public class TickSyncMessage extends PartyMemberMessage
+{
+    private int tickCounter;
+    private int tickCounter2;
+    private int tickCounter3;
+    private int colorIndex;
+    private int tickCount;
+    private String displayName;
+    private String localSender;
+
+    public TickSyncMessage() {}
+
+    public TickSyncMessage(int tickCounter, int tickCounter2, int tickCounter3, int colorIndex, int tickCount, String localSender, String displayName)
+    {
+        this.tickCounter = tickCounter;
+        this.tickCounter2 = tickCounter2;
+        this.tickCounter3 = tickCounter3;
+        this.colorIndex = colorIndex;
+        this.tickCount = tickCount;
+        this.localSender = localSender;
+        this.displayName = displayName;
+
+    }
+
+    // getter and setter for memberId
+    public String getSenderName() { return localSender; }
+    public void setSenderName(String localSender) { this.localSender = localSender; }
+
+
+    // getter and setter for memberId
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
+
+    public int getTickCount()
+    {
+        return tickCount;
+    }
+
+
+    public int getTickCounter()
+    {
+        return tickCounter;
+    }
+
+    public int getTickCounter2()
+    {
+        return tickCounter2;
+    }
+
+    public int getTickCounter3()
+    {
+        return tickCounter3;
+    }
+
+    public int getColorIndex()
+    {
+        return colorIndex;
+    }
+}
