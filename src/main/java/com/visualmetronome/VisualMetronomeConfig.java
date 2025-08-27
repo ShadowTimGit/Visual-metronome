@@ -7,6 +7,8 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.Range;
 import net.runelite.client.config.ConfigSection;
 import net.runelite.client.config.Keybind;
+
+import net.runelite.client.config.*;
 import java.awt.Color;
 
 @ConfigGroup("visualmetronome")
@@ -573,5 +575,26 @@ public interface VisualMetronomeConfig extends Config
 	{
 		return false;
 	}
+
+    @ConfigItem(
+            keyName = "enablePartySync",
+            name = "Enable Party Sync",
+            description = "Synchronize tick counters with a selected party member"
+    )
+    default boolean enablePartySync()
+    {
+        return false;
+    }
+
+    @ConfigItem(
+            keyName = "syncTarget",
+            name = "Sync Target",
+            description = "Choose which party member to sync ticks with"
+    )
+    default String syncTarget()
+    {
+        return "";
+    }
+
 }
 
