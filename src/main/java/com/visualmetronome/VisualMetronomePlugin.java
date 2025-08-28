@@ -124,20 +124,20 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
             PartyMember localPlayer = partyService.getLocalMember();
             for (PartyMember member : members)
             {
-                    TickSyncMessage msg = new TickSyncMessage(
-                            tickCounter,
-                            tickCounter2,
-                            tickCounter3,
-                            currentColorIndex,
-                            config.tickCount(),
-                            config.tickCount2(),
-                            config.tickCount3(),
-                            localPlayer.getDisplayName(),
-                            member.getDisplayName()
-                    );
+                TickSyncMessage msg = new TickSyncMessage(
+                        tickCounter,
+                        tickCounter2,
+                        tickCounter3,
+                        currentColorIndex,
+                        config.tickCount(),
+                        config.tickCount2(),
+                        config.tickCount3(),
+                        localPlayer.getDisplayName(),
+                        member.getDisplayName()
+                );
 
-                    partyService.send(msg);
-                    break;
+                partyService.send(msg);
+                break;
 
             }
         }
@@ -146,12 +146,18 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Subscribe
     public void onTickSyncMessage(TickSyncMessage msg)
     {
+        if (!config.enablePartySync())
+        {
+            return;
+        }
+
         String Sender = msg.getSenderName();
         String targetName = config.syncTarget();
 
-        if(!config.enablePartySync()){return;}
-
-        if (!Objects.equals(Sender, targetName)){return;}
+        if (!Objects.equals(Sender, targetName))
+        {
+            return;
+        }
 
         //  Apply received counters
         this.tickCounter = msg.getTickCounter();
