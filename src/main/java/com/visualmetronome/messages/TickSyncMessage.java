@@ -16,7 +16,7 @@ public class TickSyncMessage extends PartyMemberMessage
 
     public TickSyncMessage() {}
 
-    public TickSyncMessage(int tickCounter, int tickCounter2, int tickCounter3, int colorIndex, int tickCount, int tickCount2, int tickCount3, String localSender, String displayName)
+    public TickSyncMessage(int tickCounter, int tickCounter2, int tickCounter3, int colorIndex, int tickCount, int tickCount2, int tickCount3, String localSender)
     {
         this.tickCounter = tickCounter;
         this.tickCounter2 = tickCounter2;
@@ -26,28 +26,27 @@ public class TickSyncMessage extends PartyMemberMessage
         this.tickCount2 = tickCount2;
         this.tickCount3 = tickCount3;
         this.localSender = localSender;
+
+    }
+
+    public String getlocalSender()
+    {
+        return localSender;
+    }
+
+    public void setlocalSender(String localSender)
+    {
+        this.localSender = localSender;
+    }
+
+    public String getDisplayName()
+    {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName)
+    {
         this.displayName = displayName;
-
-    }
-
-    public String getSenderName() 
-    { 
-        return localSender; 
-    }
-
-    public void setSenderName(String localSender) 
-    { 
-        this.localSender = localSender; 
-    }
-
-    public String getDisplayName() 
-    { 
-        return displayName; 
-    }
-
-    public void setDisplayName(String displayName) 
-    { 
-        this.displayName = displayName; 
     }
 
     public int getTickCount()
