@@ -23,6 +23,7 @@ import net.runelite.client.party.WSClient;
 import net.runelite.client.party.events.UserJoin;
 import net.runelite.client.party.events.UserPart;
 import com.visualmetronome.messages.TickSyncMessage;
+import com.visualmetronome.messages.TickRequestMessage;
 import net.runelite.client.party.PartyMember;
 
 import java.util.Collections;
@@ -113,25 +114,36 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         members = partyService.getMembers();
 
         // Party sync
-        if (!members.isEmpty())
+        if (!members.isEmpty() && config.enablePartySync())
         {
+            String targetName = config.syncTarget();
 
-            PartyMember localPlayer = partyService.getLocalMember();
+            partyService.send(new TickRequestMessage(targetName));
+        }
+    }
 
-            TickSyncMessage msg = new TickSyncMessage(
-                    tickCounter,
-                    tickCounter2,
-                    tickCounter3,
-                    currentColorIndex,
-                    config.tickCount(),
-                    config.tickCount2(),
-                    config.tickCount3(),
-                    localPlayer.getDisplayName()
-            );
+    @Subscribe
+    public void onTickRequestMessage(TickRequestMessage target)
+    {
+        String syncTarget = target.getTarget();
+        PartyMember localPlayer = partyService.getLocalMember();
 
-            partyService.send(msg);
+        if (!localPlayer.getDisplayName().equalsIgnoreCase(syncTarget))
+        {
+            return;
         }
 
+        TickSyncMessage msg = new TickSyncMessage(
+                tickCounter,
+                tickCounter2,
+                tickCounter3,
+                currentColorIndex,
+                config.tickCount(),
+                config.tickCount2(),
+                config.tickCount3(),
+                localPlayer.getDisplayName()
+        );
+        partyService.send(msg);
     }
 
     @Subscribe
@@ -224,6 +236,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         overlayManager.add(mouseFollowingOverlay);
         keyManager.registerKeyListener(this);
         wsClient.registerMessage(TickSyncMessage.class);
+        wsClient.registerMessage(TickRequestMessage.class);
 
     }
 
@@ -241,6 +254,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         overlayManager.remove(mouseFollowingOverlay);
         keyManager.unregisterKeyListener(this);
         wsClient.unregisterMessage(TickSyncMessage.class);
+        wsClient.unregisterMessage(TickRequestMessage.class);
 
     }
 
