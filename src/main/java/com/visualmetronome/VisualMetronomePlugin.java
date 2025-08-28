@@ -120,9 +120,9 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 {
                     return;
                 }
-    
+
                 PartyMember localPlayer = partyService.getLocalMember();
-    
+
                 TickSyncMessage msg = new TickSyncMessage(
                         tickCounter,
                         tickCounter2,
@@ -133,7 +133,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                         config.tickCount3(),
                         localPlayer.getDisplayName()
                 );
-    
+
                 partyService.send(msg);
             }
 
