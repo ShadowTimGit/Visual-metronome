@@ -578,10 +578,10 @@ public interface VisualMetronomeConfig extends Config
     @ConfigSection(
             name = "Party Sync Settings",
             description = "Settings for syncing your metronome to a member of your party",
-            position = 11,
+            position = 10,
             closedByDefault = true
     )
-    
+
     String PartySyncSettings = "Party Sync Settings";
 
     @ConfigItem(
