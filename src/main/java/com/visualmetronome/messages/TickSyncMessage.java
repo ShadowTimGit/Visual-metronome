@@ -30,13 +30,10 @@ public class TickSyncMessage extends PartyMemberMessage
 
     }
 
-    // getter and setter for memberId
     public String getSenderName() { return localSender; }
 
     public void setSenderName(String localSender) { this.localSender = localSender; }
 
-
-    // getter and setter for memberId
     public String getDisplayName() { return displayName; }
 
     public void setDisplayName(String displayName) { this.displayName = displayName; }
