@@ -578,7 +578,7 @@ public interface VisualMetronomeConfig extends Config
     @ConfigSection(
             name = "Party Sync Settings",
             description = "Settings for syncing your metronome to a member of your party",
-            position = 10,
+            position = 11,
             closedByDefault = true
     )
 
