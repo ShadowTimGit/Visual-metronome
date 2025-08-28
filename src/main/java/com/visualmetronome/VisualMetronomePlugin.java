@@ -112,30 +112,25 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
         members = partyService.getMembers();
 
-    // Party sync
-            if (!members.isEmpty())
-            {
-                String targetName = config.syncTarget();
-                if (targetName == null || targetName.isEmpty())
-                {
-                    return;
-                }
+        // Party sync
+        if (!members.isEmpty())
+        {
 
-                PartyMember localPlayer = partyService.getLocalMember();
+            PartyMember localPlayer = partyService.getLocalMember();
 
-                TickSyncMessage msg = new TickSyncMessage(
-                        tickCounter,
-                        tickCounter2,
-                        tickCounter3,
-                        currentColorIndex,
-                        config.tickCount(),
-                        config.tickCount2(),
-                        config.tickCount3(),
-                        localPlayer.getDisplayName()
-                );
+            TickSyncMessage msg = new TickSyncMessage(
+                    tickCounter,
+                    tickCounter2,
+                    tickCounter3,
+                    currentColorIndex,
+                    config.tickCount(),
+                    config.tickCount2(),
+                    config.tickCount3(),
+                    localPlayer.getDisplayName()
+            );
 
-                partyService.send(msg);
-            }
+            partyService.send(msg);
+        }
 
     }
 
