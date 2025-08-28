@@ -112,18 +112,17 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
         members = partyService.getMembers();
 
-        // Party sync
-        if (!members.isEmpty())
-        {
-            String targetName = config.syncTarget();
-            if (targetName == null || targetName.isEmpty())
+    // Party sync
+            if (!members.isEmpty())
             {
-                return;
-            }
-
-            PartyMember localPlayer = partyService.getLocalMember();
-            for (PartyMember member : members)
-            {
+                String targetName = config.syncTarget();
+                if (targetName == null || targetName.isEmpty())
+                {
+                    return;
+                }
+    
+                PartyMember localPlayer = partyService.getLocalMember();
+    
                 TickSyncMessage msg = new TickSyncMessage(
                         tickCounter,
                         tickCounter2,
@@ -132,16 +131,12 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                         config.tickCount(),
                         config.tickCount2(),
                         config.tickCount3(),
-                        localPlayer.getDisplayName(),
-                        member.getDisplayName()
+                        localPlayer.getDisplayName()
                 );
-
+    
                 partyService.send(msg);
-
             }
-                
-            break;
-        }
+
     }
 
     @Subscribe
@@ -152,7 +147,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
             return;
         }
 
-        String Sender = msg.getSenderName();
+        String Sender = msg.getlocalSender();
         String targetName = config.syncTarget();
 
         if (!Sender.equalsIgnoreCase(targetName))
