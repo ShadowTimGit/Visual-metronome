@@ -72,7 +72,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Inject
     private WSClient wsClient;
 
-    // Get all members
     List<PartyMember> members = Collections.emptyList();
 
     private static final String CONFIG_GROUP = "visualmetronome";
@@ -111,7 +110,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         }
         tickCounter3++;
 
-        // Get all members
         members = partyService.getMembers();
 
         // Party sync
@@ -184,14 +182,12 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     @Subscribe
     public void onUserJoin(UserJoin event)
     {
-        // Get all members
         members = partyService.getMembers();
     }
 
     @Subscribe
     public void onUserPart(UserPart event)
     {
-        // Get all members
         members = partyService.getMembers();
     }
 
