@@ -137,9 +137,10 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 );
 
                 partyService.send(msg);
-                break;
 
             }
+                
+            break;
         }
     }
 
