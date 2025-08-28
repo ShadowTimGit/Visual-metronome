@@ -154,7 +154,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         String Sender = msg.getSenderName();
         String targetName = config.syncTarget();
 
-        if (!Objects.equals(Sender, targetName))
+        if (!Sender.equalsIgnoreCase(targetName))
         {
             return;
         }
