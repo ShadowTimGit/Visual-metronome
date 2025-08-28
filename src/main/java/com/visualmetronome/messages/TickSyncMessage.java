@@ -30,13 +30,25 @@ public class TickSyncMessage extends PartyMemberMessage
 
     }
 
-    public String getSenderName() { return localSender; }
+    public String getSenderName() 
+    { 
+        return localSender; 
+    }
 
-    public void setSenderName(String localSender) { this.localSender = localSender; }
+    public void setSenderName(String localSender) 
+    { 
+        this.localSender = localSender; 
+    }
 
-    public String getDisplayName() { return displayName; }
+    public String getDisplayName() 
+    { 
+        return displayName; 
+    }
 
-    public void setDisplayName(String displayName) { this.displayName = displayName; }
+    public void setDisplayName(String displayName) 
+    { 
+        this.displayName = displayName; 
+    }
 
     public int getTickCount()
     {
