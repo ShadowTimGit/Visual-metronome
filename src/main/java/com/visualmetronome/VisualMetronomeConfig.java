@@ -575,20 +575,34 @@ public interface VisualMetronomeConfig extends Config
 		return false;
 	}
 
+    @ConfigSection(
+            name = "Party Sync Settings",
+            description = "Settings for syncing your metronome to a member of your party",
+            position = 11,
+            closedByDefault = true
+    )
+    
+    String PartySyncSettings = "Party Sync Settings";
+
     @ConfigItem(
+            position = 1,
             keyName = "enablePartySync",
             name = "Enable Party Sync",
-            description = "Synchronize tick counters with a selected party member"
+            description = "Synchronize tick counters with a selected party member",
+            section = PartySyncSettings
     )
+
     default boolean enablePartySync()
     {
         return false;
     }
 
     @ConfigItem(
+            position = 2,
             keyName = "syncTarget",
             name = "Sync Target",
-            description = "Choose which party member to sync ticks with"
+            description = "Choose which party member to sync ticks with",
+            section = PartySyncSettings
     )
     default String syncTarget()
     {
