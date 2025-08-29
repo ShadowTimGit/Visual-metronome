@@ -110,6 +110,9 @@ Tick Counts will be sync'd to the target player
     - Fixed bug for Reset to Specific Tick feature *(Thanks [Slug-Man](https://github.com/Slug-Man))*
 - **V1.4.8**
     - Added Tick Counter Follows Mouse *(Thanks [Manlet008](https://github.com/Manlet008))*
+- **V1.5**
+    - Added Party Sync functionality *(Thanks [Stromboli](https://github.com/ShadowTimGit))*
+
 
 # Feedback
 I'm open to all feedback on bugs or features you want to see in this plugin. Give feedback here on this github page or message me on discord, vincent58. 
