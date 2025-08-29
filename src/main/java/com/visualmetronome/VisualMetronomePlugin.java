@@ -76,6 +76,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
     private static final String CONFIG_GROUP = "visualmetronome";
     protected int currentColorIndex = 0;
+    protected int configColorIndex = 0;
     protected int tickCounter = 0;
     protected int tickCounter2 = 0;
     protected int tickCounter3 = 0;
@@ -114,13 +115,16 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
         members = partyService.getMembers();
 
-        // Party sync
-        if (!members.isEmpty() && config.enablePartySync())
+        //party sync
+        if (config.enablePartySync())
         {
-            String targetName = config.syncTarget();
-
-            partyService.send(new TickRequestMessage(targetName));
+            if (!members.isEmpty())
+            {
+                String targetName = config.syncTarget();
+                partyService.send(new TickRequestMessage(targetName));
+            }
         }
+
     }
 
     @Subscribe
@@ -145,6 +149,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 tickCounter2,
                 tickCounter3,
                 currentColorIndex,
+                configColorIndex = config.colorCycle(),
                 config.tickCount(),
                 config.tickCount2(),
                 config.tickCount3(),
@@ -192,6 +197,11 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 CONFIG_GROUP,
                 "tickCount3",
                 msg.getTickCount3()
+        );
+        configManager.setConfiguration(
+                CONFIG_GROUP,
+                "colorCycle",
+                msg.getConfigColorIndex()
         );
     }
 

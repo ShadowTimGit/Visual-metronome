@@ -8,20 +8,23 @@ public class TickSyncMessage extends PartyMemberMessage
     private int tickCounter2;
     private int tickCounter3;
     private int colorIndex;
+    private int configColorIndex;
     private int tickCount;
     private int tickCount2;
     private int tickCount3;
+
     private String displayName;
     private String localSender;
 
     public TickSyncMessage() {}
 
-    public TickSyncMessage(int tickCounter, int tickCounter2, int tickCounter3, int colorIndex, int tickCount, int tickCount2, int tickCount3, String localSender)
+    public TickSyncMessage(int tickCounter, int tickCounter2, int tickCounter3, int colorIndex, int configColorIndex, int tickCount, int tickCount2, int tickCount3, String localSender)
     {
         this.tickCounter = tickCounter;
         this.tickCounter2 = tickCounter2;
         this.tickCounter3 = tickCounter3;
         this.colorIndex = colorIndex;
+        this.configColorIndex = configColorIndex;
         this.tickCount = tickCount;
         this.tickCount2 = tickCount2;
         this.tickCount3 = tickCount3;
@@ -82,5 +85,10 @@ public class TickSyncMessage extends PartyMemberMessage
     public int getColorIndex()
     {
         return colorIndex;
+    }
+
+    public int getConfigColorIndex()
+    {
+        return configColorIndex;
     }
 }
