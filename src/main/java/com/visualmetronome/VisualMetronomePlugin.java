@@ -72,6 +72,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     private WSClient wsClient;
 
     List<PartyMember> members = Collections.emptyList();
+    private boolean hasRespondedThisTick = false;
 
     private static final String CONFIG_GROUP = "visualmetronome";
     protected int currentColorIndex = 0;
@@ -86,8 +87,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
     {
         return configManager.getConfig(VisualMetronomeConfig.class);
     }
-
-    private boolean hasRespondedThisTick = false;
 
     @Subscribe
     public void onGameTick(GameTick tick)
