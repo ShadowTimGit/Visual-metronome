@@ -28,8 +28,6 @@ import net.runelite.client.party.PartyMember;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-
 
 
 @PluginDescriptor(
@@ -89,9 +87,13 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         return configManager.getConfig(VisualMetronomeConfig.class);
     }
 
+    private boolean hasRespondedThisTick = false;
+
     @Subscribe
     public void onGameTick(GameTick tick)
     {
+        hasRespondedThisTick = false;
+
         if (tickCounter % config.tickCount() == 0)
         {
             tickCounter = 0;
@@ -132,6 +134,12 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
         {
             return;
         }
+
+        if (hasRespondedThisTick)
+        {
+            return;
+        }
+        hasRespondedThisTick = true;
 
         TickSyncMessage msg = new TickSyncMessage(
                 tickCounter,
