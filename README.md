@@ -14,10 +14,19 @@ Alt+right click on the overlay to reset to default size
 
 ![](https://i.imgur.com/SWQKf9i.gif)
 
-# Settings
-![](https://i.imgur.com/tmT2v2l.png)
+# Party Sync Functionality
+Type the name of a player in your party
 
-![](https://i.imgur.com/iFk0lsj.png)
+![](https://i.imgur.com/vuRrLJ9.png)
+
+Tick Counts will be sync'd to the target player
+![](https://i.imgur.com/LEwh5RJ.gif)
+
+
+# Settings
+![](https://i.imgur.com/3d8DRoq.png)
+
+![](https://i.imgur.com/jLls9zb.png)
 
 # Changelog
 - **V1.1**
