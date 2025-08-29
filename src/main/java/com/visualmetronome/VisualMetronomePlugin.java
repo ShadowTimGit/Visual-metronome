@@ -76,7 +76,6 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
 
     private static final String CONFIG_GROUP = "visualmetronome";
     protected int currentColorIndex = 0;
-    protected int configColorIndex = 0;
     protected int tickCounter = 0;
     protected int tickCounter2 = 0;
     protected int tickCounter3 = 0;
@@ -149,7 +148,7 @@ public class VisualMetronomePlugin extends Plugin implements KeyListener
                 tickCounter2,
                 tickCounter3,
                 currentColorIndex,
-                configColorIndex = config.colorCycle(),
+                config.colorCycle(),
                 config.tickCount(),
                 config.tickCount2(),
                 config.tickCount3(),

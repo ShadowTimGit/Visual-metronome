@@ -67,7 +67,7 @@ public interface VisualMetronomeConfig extends Config
 	@ConfigSection(
 			name = "Tick Number Settings",
 			description = "Change Tick Number settings",
-			position = 5
+			position = 4
 	)
 	String TickNumberSettings = "Tick Number Settings";
 
@@ -147,7 +147,7 @@ public interface VisualMetronomeConfig extends Config
 	@ConfigSection(
 			name = "True Tile Overlay Settings",
 			description = "Settings only applied to True Tile Overlay",
-			position = 6
+			position = 5
 	)
 	String TileSettings = "True Tile Overlay Settings";
 
@@ -204,7 +204,42 @@ public interface VisualMetronomeConfig extends Config
 		return 50;
 	}
 
-	@ConfigSection(
+
+    @ConfigSection(
+            name = "Party Sync Settings",
+            description = "Settings for syncing your metronome to a member of your party, this will modify certain config settings",
+            position = 6
+    )
+
+    String PartySyncSettings = "Party Sync Settings";
+
+    @ConfigItem(
+            position = 1,
+            keyName = "enablePartySync",
+            name = "Sync with Target",
+            description = "Synchronize tick counters with a selected party member",
+            section = PartySyncSettings
+    )
+
+    default boolean enablePartySync()
+    {
+        return false;
+    }
+
+    @ConfigItem(
+            position = 2,
+            keyName = "syncTarget",
+            name = "Sync Target",
+            description = "Choose which party member to sync ticks with",
+            section = PartySyncSettings
+    )
+    default String syncTarget()
+    {
+        return "";
+    }
+
+
+    @ConfigSection(
 			name = "Color Settings",
 			description = "Change the colors and number of colors to cycle through",
 			position = 7
@@ -574,40 +609,6 @@ public interface VisualMetronomeConfig extends Config
 	{
 		return false;
 	}
-
-    @ConfigSection(
-            name = "Party Sync Settings",
-            description = "Settings for syncing your metronome to a member of your party",
-            position = 11,
-            closedByDefault = true
-    )
-
-    String PartySyncSettings = "Party Sync Settings";
-
-    @ConfigItem(
-            position = 1,
-            keyName = "enablePartySync",
-            name = "Sync with Target",
-            description = "Synchronize tick counters with a selected party member",
-            section = PartySyncSettings
-    )
-
-    default boolean enablePartySync()
-    {
-        return false;
-    }
-
-    @ConfigItem(
-            position = 2,
-            keyName = "syncTarget",
-            name = "Sync Target",
-            description = "Choose which party member to sync ticks with",
-            section = PartySyncSettings
-    )
-    default String syncTarget()
-    {
-        return "";
-    }
 
 }
 
